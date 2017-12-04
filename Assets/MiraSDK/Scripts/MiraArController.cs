@@ -118,7 +118,7 @@ namespace Mira
         private void Start()
         {
             // For screen orientation
-            Screen.autorotateToPortrait = true;
+            Screen.autorotateToPortrait = false;
             Screen.autorotateToLandscapeLeft = true;
             Screen.autorotateToPortraitUpsideDown = false;
             Screen.autorotateToLandscapeRight = false;
