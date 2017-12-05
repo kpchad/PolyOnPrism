@@ -45,7 +45,11 @@ public class PolyAssets : MonoBehaviour {
 
     // thumbnails to render
     public Material firstThumbnail;
+    public Material secondThumbnail;
+    public Material thirdThumbnail;
+    public Material fourthThumbnail;
 
+    List<PolyAsset> assetsInPalette = new List<PolyAsset>();
 
     private void Start() {
         // Request a list of featured assets from Poly.
@@ -69,43 +73,38 @@ public class PolyAssets : MonoBehaviour {
         Debug.Log("Successfully got featured assets!");
         statusText.text = "Importing thumbnails...";
 
-        //    // Set the import options.
-        //    PolyImportOptions options = PolyImportOptions.Default();
-        //    // We want to rescale the imported meshes to a specific size.
-        //    options.rescalingMode = PolyImportOptions.RescalingMode.FIT;
-        //    // The specific size we want assets rescaled to (fit in a 1x1x1 box):
-        //    options.desiredSize = 1.0f;
-        //    // We want the imported assets to be recentered such that their centroid coincides with the origin:
-        //    options.recenter = true;
-
         // Now let's get the first 5 featured assets and show their thumbnails
-        List<PolyAsset> assetsInUse = new List<PolyAsset>();
-        for (int i = 0; i < Mathf.Min(5, result.Value.assets.Count); i++) {
-
+        for (int i = 0; i < Mathf.Min(4, result.Value.assets.Count); i++) {
             // fetch this asset's thumbnail
             PolyApi.FetchThumbnail(result.Value.assets[i], FetchThumbnailCallback);
-
-
-            //// Import this asset.
-            //PolyApi.Import(result.Value.assets[i], options, ImportAssetCallback);
-            //assetsInUse.Add(result.Value.assets[i]);
+            assetsInPalette.Add(result.Value.assets[i]);
         }
 
         //    // Show attributions for the assets we display.
         //    attributionsText.text = PolyApi.GenerateAttributions(includeStatic: true, runtimeAssets: assetsInUse);
     }
 
-    // Callback invoked when an asset has just been imported.
+    int thumbnailCount = 0;
+    // Callback invoked when a thumbnail has just been fetched.
     private void FetchThumbnailCallback(PolyAsset asset, PolyStatus result) {
         if (!result.ok) {
-            Debug.LogError("Failed to import asset. :( Reason: " + result.errorMessage);
+            Debug.LogError("Failed to import thumbnail. :( Reason: " + result.errorMessage);
             return;
         }
-        firstThumbnail.mainTexture = asset.thumbnailTexture;
+        if (thumbnailCount == 0){
+            firstThumbnail.mainTexture = assetsInPalette[0].thumbnailTexture;
+        }
+        else if (thumbnailCount == 1){
+            secondThumbnail.mainTexture = assetsInPalette[1].thumbnailTexture;
+        }
+        else if(thumbnailCount == 2) {
+            thirdThumbnail.mainTexture = assetsInPalette[2].thumbnailTexture;
+        }
+        else if (thumbnailCount == 3){
+            fourthThumbnail.mainTexture = assetsInPalette[3].thumbnailTexture;
+        }
+        else{
+        }
+        thumbnailCount++;
     }
-    //// Position each asset evenly spaced from the next.
-    //assetCount++;
-    //result.Value.gameObject.transform.position = new Vector3(assetCount * 1.5f, 0f, 0f);
-
-    //statusText.text = "Imported " + assetCount + " assets";
 }
