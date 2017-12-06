@@ -57,3 +57,7 @@ MonoBehaviour:
   secondThumbnail: {fileID: 2100000, guid: d9ff1ea01b7164cd6a3807553a139895, type: 2}
   thirdThumbnail: {fileID: 2100000, guid: 8b49a68e530c34bc48a63d54c290f0dd, type: 2}
   fourthThumbnail: {fileID: 2100000, guid: 9f5d1842b0a2842779cb9dbf0201a4f6, type: 2}
+  button1: {fileID: 0}
+  button2: {fileID: 0}
+  button3: {fileID: 0}
+  button4: {fileID: 0}

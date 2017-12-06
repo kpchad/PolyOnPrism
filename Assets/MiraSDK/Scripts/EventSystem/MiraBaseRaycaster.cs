@@ -44,7 +44,7 @@ public abstract class MiraBaseRaycaster : BaseRaycaster
     {
         if (raycastStyle == RaycastStyle.World)
         {
-            Debug.Log("WORLDRAYCAST,YO!");
+            //Debug.Log("WORLDRAYCAST,YO!");
             lastray = new Ray(MiraController.Position, MiraController.Transform.forward);
         }
         else if (raycastStyle == RaycastStyle.Camera)

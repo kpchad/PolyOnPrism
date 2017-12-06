@@ -34,9 +34,6 @@ public class PolyAssets : MonoBehaviour {
     //
     // This example does not use authentication, so there is no need to fill in a Client ID or Client Secret.
 
-    // Number of assets imported so far.
-    private int assetCount = 0;
-
     // Text field where we display the attributions (credits) for the assets we display.
     public Text attributionsText;
 
@@ -49,17 +46,31 @@ public class PolyAssets : MonoBehaviour {
     public Material thirdThumbnail;
     public Material fourthThumbnail;
 
+    public Button button1;
+    public Button button2;
+    public Button button3;
+    public Button button4;
+
     List<PolyAsset> assetsInPalette = new List<PolyAsset>();
 
+    // Number of assets imported so far.
+    private int assetCount = 0;
+
     private void Start() {
-        // Request a list of featured assets from Poly.
-        Debug.Log("Getting featured assets...");
+        // display featured asset thumbnais
+        Debug.Log("Getting featured asset thumbnails...");
         statusText.text = "Requesting...";
 
         PolyListAssetsRequest request = PolyListAssetsRequest.Featured();
         // Limit requested models to those of medium complexity or lower.
         request.maxComplexity = PolyMaxComplexityFilter.MEDIUM;
         PolyApi.ListAssets(request, ListAssetsCallback);
+
+        // setup add asset buttons
+        button1.onClick.AddListener(delegate { ImportAsset(0); });
+        button2.onClick.AddListener(delegate { ImportAsset(1); });
+        button3.onClick.AddListener(delegate { ImportAsset(2); });
+        button4.onClick.AddListener(delegate { ImportAsset(3); });
     }
 
     // Callback invoked when the featured assets results are returned.
@@ -73,15 +84,13 @@ public class PolyAssets : MonoBehaviour {
         Debug.Log("Successfully got featured assets!");
         statusText.text = "Importing thumbnails...";
 
-        // Now let's get the first 5 featured assets and show their thumbnails
+        // Now let's get the first 4 featured assets and show their thumbnails
         for (int i = 0; i < Mathf.Min(4, result.Value.assets.Count); i++) {
             // fetch this asset's thumbnail
             PolyApi.FetchThumbnail(result.Value.assets[i], FetchThumbnailCallback);
             assetsInPalette.Add(result.Value.assets[i]);
         }
 
-        //    // Show attributions for the assets we display.
-        //    attributionsText.text = PolyApi.GenerateAttributions(includeStatic: true, runtimeAssets: assetsInUse);
     }
 
     int thumbnailCount = 0;
@@ -106,5 +115,41 @@ public class PolyAssets : MonoBehaviour {
         else{
         }
         thumbnailCount++;
+        statusText.text = "pick an asset to import";
     }
-}
+
+    void ImportAsset(int idx) {
+
+        List<PolyAsset> assetsInUse = new List<PolyAsset>();
+
+        // Set the import options.
+        PolyImportOptions options = PolyImportOptions.Default();
+        // We want to rescale the imported meshes to a specific size.
+        options.rescalingMode = PolyImportOptions.RescalingMode.FIT;
+        // The specific size we want assets rescaled to (fit in a 1x1x1 box):
+        options.desiredSize = 1.0f;
+        // We want the imported assets to be recentered such that their centroid coincides with the origin:
+        options.recenter = true;
+
+        Debug.Log("import asset " + idx);
+        PolyApi.Import(assetsInPalette[idx],options,ImportAssetCallback);
+        assetsInUse.Add(assetsInPalette[idx]);
+
+        // Show attributions for the assets we display.
+        //attributionsText.text = PolyApi.GenerateAttributions(includeStatic: true, runtimeAssets: assetsInUse);
+    }
+
+    // Callback invoked when an asset has just been imported.
+    private void ImportAssetCallback(PolyAsset asset, PolyStatusOr<PolyImportResult> result) {
+        if (!result.Ok) {
+            Debug.LogError("Failed to import asset. :( Reason: " + result.Status);
+            return;
+        }
+
+        // Position each asset evenly spaced from the next.
+        assetCount++;
+        result.Value.gameObject.transform.position = new Vector3((assetCount * 1.5f - 1.5f), 0f, 3f);
+
+        //statusText.text = "Imported " + assetCount + " assets";
+    }
+}        
