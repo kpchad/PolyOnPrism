@@ -100,19 +100,23 @@ public class PolyAssets : MonoBehaviour {
             Debug.LogError("Failed to import thumbnail. :( Reason: " + result.errorMessage);
             return;
         }
-        if (thumbnailCount == 0){
-            firstThumbnail.mainTexture = assetsInPalette[0].thumbnailTexture;
-        }
-        else if (thumbnailCount == 1){
-            secondThumbnail.mainTexture = assetsInPalette[1].thumbnailTexture;
-        }
-        else if(thumbnailCount == 2) {
-            thirdThumbnail.mainTexture = assetsInPalette[2].thumbnailTexture;
-        }
-        else if (thumbnailCount == 3){
-            fourthThumbnail.mainTexture = assetsInPalette[3].thumbnailTexture;
-        }
-        else{
+        switch (thumbnailCount) { // grab thumbnails of assets, assign as the UISprites to the buttons
+            case 0:
+                Texture2D tex2D1 = assetsInPalette[0].thumbnailTexture;
+                button1.image.sprite = Sprite.Create(tex2D1, new Rect(0.0f, 0.0f, tex2D1.width, tex2D1.height), new Vector2(0.5f, 0.5f));
+                break;
+            case 1:
+                Texture2D tex2D2 = assetsInPalette[1].thumbnailTexture;
+                button2.image.sprite = Sprite.Create(tex2D2, new Rect(0.0f, 0.0f, tex2D2.width, tex2D2.height), new Vector2(0.5f, 0.5f));
+                break;
+            case 2:
+                Texture2D tex2D3 = assetsInPalette[2].thumbnailTexture;
+                button3.image.sprite = Sprite.Create(tex2D3, new Rect(0.0f, 0.0f, tex2D3.width, tex2D3.height), new Vector2(0.5f, 0.5f));
+                break;
+            case 3:
+                Texture2D tex2D4 = assetsInPalette[3].thumbnailTexture;
+                button4.image.sprite = Sprite.Create(tex2D4, new Rect(0.0f, 0.0f, tex2D4.width, tex2D4.height), new Vector2(0.5f, 0.5f));
+                break;
         }
         thumbnailCount++;
         statusText.text = "pick an asset to import";

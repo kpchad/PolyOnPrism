@@ -82,7 +82,7 @@ public class ShowFeaturedExample : MonoBehaviour {
     }
 
     // Show attributions for the assets we display.
-    //attributionsText.text = PolyApi.GenerateAttributions(includeStatic: true, runtimeAssets: assetsInUse);
+    attributionsText.text = PolyApi.GenerateAttributions(includeStatic: true, runtimeAssets: assetsInUse);
   }
 
   // Callback invoked when an asset has just been imported.
