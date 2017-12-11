@@ -41,11 +41,6 @@ public class PolyAssets : MonoBehaviour {
     public Text statusText;
 
     // thumbnails to render
-    public Material firstThumbnail;
-    public Material secondThumbnail;
-    public Material thirdThumbnail;
-    public Material fourthThumbnail;
-
     public Button button1;
     public Button button2;
     public Button button3;
@@ -154,6 +149,14 @@ public class PolyAssets : MonoBehaviour {
         assetCount++;
         result.Value.gameObject.transform.position = new Vector3((assetCount * 1.5f - 1.5f), 0f, 3f);
 
-        //statusText.text = "Imported " + assetCount + " assets";
+        //statusText.text = "Imported " + assetCount + " assets";        
+
+        // add components to newly created gameObject
+        result.Value.gameObject.AddComponent<BoxCollider>();
+        result.Value.gameObject.AddComponent<Rigidbody>();
+        var rb = result.Value.gameObject.GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        result.Value.gameObject.AddComponent<MiraPhysicsGrabExample>();
+        result.Value.gameObject.AddComponent<MiraPhysicsRaycast>();
     }
 }        

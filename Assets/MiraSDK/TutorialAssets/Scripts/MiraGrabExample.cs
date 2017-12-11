@@ -36,7 +36,7 @@ public class MiraGrabExample : MonoBehaviour, IPointerDownHandler
     // Use this for initialization
     private void Start()
     {
-        textBeneathPlanet.text = "Grab Me!";
+//        textBeneathPlanet.text = "Grab Me!";
     }
 
     // Update is called once per frame
