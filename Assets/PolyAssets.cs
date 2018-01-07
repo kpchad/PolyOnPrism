@@ -15,7 +15,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-
 using PolyToolkit;
 
 /// <summary>
@@ -156,7 +155,7 @@ public class PolyAssets : MonoBehaviour {
         result.Value.gameObject.AddComponent<Rigidbody>();
         var rb = result.Value.gameObject.GetComponent<Rigidbody>();
         rb.useGravity = false;
-        result.Value.gameObject.AddComponent<MiraPhysicsGrabExample>();
+        result.Value.gameObject.AddComponent<GrabObject>();//previously MiraPhysicsGrabExample
         result.Value.gameObject.AddComponent<MiraPhysicsRaycast>();
     }
 }        
