@@ -48,15 +48,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1589324505184204}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f85b449ac7274bf896b066268dff093, type: 3}
+  m_Script: {fileID: 11500000, guid: c5ce3c5f2033444dabf1739dc835e1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attributionsText: {fileID: 0}
   statusText: {fileID: 0}
-  firstThumbnail: {fileID: 2100000, guid: 5a369fa56ab8646138af8357d90d8aea, type: 2}
-  secondThumbnail: {fileID: 2100000, guid: d9ff1ea01b7164cd6a3807553a139895, type: 2}
-  thirdThumbnail: {fileID: 2100000, guid: 8b49a68e530c34bc48a63d54c290f0dd, type: 2}
-  fourthThumbnail: {fileID: 2100000, guid: 9f5d1842b0a2842779cb9dbf0201a4f6, type: 2}
   button1: {fileID: 0}
   button2: {fileID: 0}
   button3: {fileID: 0}

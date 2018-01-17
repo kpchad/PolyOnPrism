@@ -16,6 +16,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using PolyToolkit;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Example that shows the top 5 featured models.
@@ -157,5 +158,13 @@ public class PolyAssets : MonoBehaviour {
         rb.useGravity = false;
         result.Value.gameObject.AddComponent<GrabObject>();//previously MiraPhysicsGrabExample
         result.Value.gameObject.AddComponent<MiraPhysicsRaycast>();
+    }
+
+    // save all objects (and associated info) to a file when you quit the app
+    void OnApplicationQuit() {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (object thisObject in allObjects) {
+            Debug.Log(thisObject);
+        }
     }
 }        
