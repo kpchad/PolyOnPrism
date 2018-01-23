@@ -82,7 +82,7 @@ namespace Mira
         private Material renderTextureMaterial;
         private float IPD;
 
-        // public float ParallaxShift = 1.89f;
+        //public float ParallaxShift = 1.89f;
         public float ParallaxShift = 0f;
 
         private double[] coefficientsXLeft;
@@ -129,12 +129,12 @@ namespace Mira
             float defaultParallaxDist = 0.6096f;
             // For maximum convergence at infinity:
             float offsetAngle = 90 - Mathf.Atan(defaultParallaxDist / (IPD * 0.5f * 0.001f)) * Mathf.Rad2Deg;
-            // Debug.Log("Offset Angle: " + offsetAngle);
+             Debug.Log("Offset Angle: " + offsetAngle);
 
             // For a custom maximum convergence planes:
             float convergenceAngle = 90 - Mathf.Atan(desiredParallaxDist / (IPD * 0.5f * 0.001f)) * Mathf.Rad2Deg;
             float hybridAngle = offsetAngle - convergenceAngle;
-            // Debug.Log("Hybrid Angle: " + hybridAngle);
+             Debug.Log("Hybrid Angle: " + hybridAngle);
 
             ParallaxShift = hybridAngle;
         }

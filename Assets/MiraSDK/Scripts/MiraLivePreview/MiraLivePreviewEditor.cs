@@ -199,7 +199,7 @@ namespace UnityEngine.XR.iOS {
 		}
 
 		public void SendToPlayer(System.Guid msgId, byte[] data) {
-			editorConnection.Send(msgId, data);
+                editorConnection.Send(msgId, data); 
 		}
 
 		public void SendToPlayer(System.Guid msgId, object serializableObject) {

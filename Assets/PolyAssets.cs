@@ -118,7 +118,7 @@ public class PolyAssets : MonoBehaviour {
     }
 
     void ImportAsset(int idx) {
-
+        Debug.Log("button clicked)");
         List<PolyAsset> assetsInUse = new List<PolyAsset>();
 
         // Set the import options.
