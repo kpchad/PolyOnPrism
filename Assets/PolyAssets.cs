@@ -147,7 +147,7 @@ public class PolyAssets : MonoBehaviour {
 
         // Position each asset evenly spaced from the next.
         assetCount++;
-        result.Value.gameObject.transform.position = new Vector3((assetCount * 1.5f - 1.5f), 0f, 3f);
+        result.Value.gameObject.transform.position = new Vector3(0f, 0f, -2f);
 
         //statusText.text = "Imported " + assetCount + " assets";        
 
