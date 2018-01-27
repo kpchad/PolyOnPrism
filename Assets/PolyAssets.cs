@@ -17,6 +17,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using PolyToolkit;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 /// <summary>
 /// Example that shows the top 5 featured models.
@@ -26,32 +27,29 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class PolyAssets : MonoBehaviour {
 
-    // ATTENTION: Before running this example, you must set your API key in Poly Toolkit settings.
-    //   1. Click "Poly | Poly Toolkit Settings..."
-    //      (or select PolyToolkit/Resources/PtSettings.asset in the editor).
-    //   2. Click the "Runtime" tab.
-    //   3. Enter your API key in the "Api key" box.
-    //
-    // This example does not use authentication, so there is no need to fill in a Client ID or Client Secret.
-
-    // Text field where we display the attributions (credits) for the assets we display.
+    // attributions (credits) text for the assets we display.
     public Text attributionsText;
-
     // Status bar text.
     public Text statusText;
-
     // thumbnails to render
     public Button button1;
     public Button button2;
     public Button button3;
     public Button button4;
-
     List<PolyAsset> assetsInPalette = new List<PolyAsset>();
-
     // Number of assets imported so far.
     private int assetCount = 0;
+    int thumbnailCount = 0;
 
     private void Start() {
+        GetPaletteThumbnails();
+    }
+
+    void Update() {
+        
+    }
+
+    private void GetPaletteThumbnails() {
         // display featured asset thumbnais
         Debug.Log("Getting featured asset thumbnails...");
         statusText.text = "Requesting...";
@@ -88,7 +86,6 @@ public class PolyAssets : MonoBehaviour {
 
     }
 
-    int thumbnailCount = 0;
     // Callback invoked when a thumbnail has just been fetched.
     private void FetchThumbnailCallback(PolyAsset asset, PolyStatus result) {
         if (!result.ok) {
