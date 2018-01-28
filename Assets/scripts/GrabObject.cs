@@ -60,30 +60,33 @@ public class GrabObject : MonoBehaviour, IPointerDownHandler {
 
             float touchInfluence = 0.0f;
             float thisTouch = 0.0f;
-            if (MiraController.TouchHeld == true && lastTouchPosition != null) {
-                // MiraController.Touchpos.Y goes from 1 to 0 , near to far
-                // we want to change this so the touchpad closer to the user returns negative values
-                // and the upper half returns positive values
-                thisTouch = MiraController.TouchPos.y;
-                // now its 0.5 to -0.5
-                thisTouch -= 0.5f;
-                // now its -0.5 to 0.5
-                thisTouch *= -1.0f;
-                // scale it down so it's not too strong
-                thisTouch *= 0.05f;
 
-                touchInfluence = lastTouchPosition - thisTouch;
-            }
-            lastTouchPosition = thisTouch;
+            // MiraController.Touchpos.Y goes from 1 to 0 , near to far
+            // we want to change this so the touchpad closer to the user returns negative values
+            // and the upper half returns positive values
+            thisTouch = MiraController.TouchPos.y;
+            Debug.Log(thisTouch);
+            // now its 0.5 to -0.5
+            //thisTouch -= 0.5f;
+            // now its -0.5 to 0.5
+            thisTouch *= -1.0f;
+            // scale it down so it's not too strong
+            thisTouch *= 0.05f;
+            Debug.Log(thisTouch);
+            touchInfluence = thisTouch;
 
             // get the distance from this object to the controller
             float currentDistance = (MiraController.Position - transform.position).magnitude;
             // the new distance of the grabbed object is the current distance,
             // adjusted by the users touch, in the direction it was from the controller
             Vector3 newLength = MiraController.Direction.normalized * (currentDistance + touchInfluence);
+            //Debug.Log(newLength);
             Vector3 newPosition = MiraController.Position + newLength;
+            //Debug.Log(newPosition);
             transform.position = newPosition;
-            Debug.Log(transform.position);
+            //Debug.Log(transform.position); 
+         
+
         }
     }
 }

@@ -36,6 +36,7 @@ public class PolyAssets : MonoBehaviour {
     public Button button2;
     public Button button3;
     public Button button4;
+
     List<PolyAsset> assetsInPalette = new List<PolyAsset>();
     // Number of assets imported so far.
     private int assetCount = 0;
@@ -46,7 +47,7 @@ public class PolyAssets : MonoBehaviour {
     }
 
     void Update() {
-        
+
     }
 
     private void GetPaletteThumbnails() {
