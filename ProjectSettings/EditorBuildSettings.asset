@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/MiraSDK/Scenes/WikiMiraTemplate.unity
     guid: 9999059dddb554e0c811540d1c6b56de
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/MiraPoly_Tracker.unity
-    guid: 6a7aed4a709d44612908b13b8d992bd6
+    guid: d92a4ba8ee6794aed829df33204555b4

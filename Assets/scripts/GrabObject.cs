@@ -27,14 +27,28 @@ public class GrabObject : MonoBehaviour, IPointerDownHandler {
 
     private float lastTouchPosition;
 
+    private float depthSpeed = 4f;
+    //private float xRange = 30f;
+
     // these OnPointer functions are automatically called when
     // the pointer interacts with a game object that this script is attached to
     public void OnPointerDown(PointerEventData pointerData) {
         // onPointerDown is called every frame the pointer is held down on the object
         // we only want to grab objects if the click button was just pressed
         // this prevents multiple objects from unintentionally getting grabbed
-        if (MiraController.ClickButtonPressed) {
-            isGrabbing = true;
+        switch (isGrabbing){
+            case true:
+                if (MiraController.ClickButtonPressed) {
+                    isGrabbing = false;
+                    Debug.Log("object released");
+                }
+                break;
+            case false:
+                if (MiraController.ClickButtonPressed) {
+                    isGrabbing = true;
+                    Debug.Log("holding object");
+                }
+                break;
         }
     }
 
@@ -47,10 +61,10 @@ public class GrabObject : MonoBehaviour, IPointerDownHandler {
     // Update is called once per frame
     private void Update() {
         // stop grabbing if the user isn't clicking
-        if (isGrabbing == true && MiraController.ClickButton == false) {
-            rigidBody.constraints = originalConstraints;
-            isGrabbing = false;
-        }
+        //if (isGrabbing == true && MiraController.ClickButton == false) {
+          //  rigidBody.constraints = originalConstraints;
+          //  isGrabbing = false;
+        //}
 
         if (isGrabbing == true) {
             // freeze the position of the physics simulation temporarily so the object doesn't
@@ -65,15 +79,15 @@ public class GrabObject : MonoBehaviour, IPointerDownHandler {
             // we want to change this so the touchpad closer to the user returns negative values
             // and the upper half returns positive values
             thisTouch = MiraController.TouchPos.y;
-            Debug.Log(thisTouch);
+            //Debug.Log(thisTouch);
             // now its 0.5 to -0.5
-            //thisTouch -= 0.5f;
+            thisTouch -= 0.5f;
             // now its -0.5 to 0.5
-            thisTouch *= -1.0f;
+            //thisTouch *= -1.0f;
             // scale it down so it's not too strong
             thisTouch *= 0.05f;
-            Debug.Log(thisTouch);
-            touchInfluence = thisTouch;
+            //Debug.Log(thisTouch);
+            //touchInfluence = thisTouch * depthSpeed * Time.deltaTime;
 
             // get the distance from this object to the controller
             float currentDistance = (MiraController.Position - transform.position).magnitude;
