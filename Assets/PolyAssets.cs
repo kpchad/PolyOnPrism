@@ -154,6 +154,7 @@ public class PolyAssets : MonoBehaviour {
         result.Value.gameObject.AddComponent<Rigidbody>();
         var rb = result.Value.gameObject.GetComponent<Rigidbody>();
         rb.useGravity = false;
+        rb.isKinematic = true;
         result.Value.gameObject.AddComponent<GrabObject>();//previously MiraPhysicsGrabExample
         result.Value.gameObject.AddComponent<MiraPhysicsRaycast>();
     }

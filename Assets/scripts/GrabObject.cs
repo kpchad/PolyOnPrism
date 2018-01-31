@@ -28,7 +28,6 @@ public class GrabObject : MonoBehaviour, IPointerDownHandler {
     private float lastTouchPosition;
 
     private float depthSpeed = 4f;
-    //private float xRange = 30f;
 
     // these OnPointer functions are automatically called when
     // the pointer interacts with a game object that this script is attached to
@@ -37,12 +36,14 @@ public class GrabObject : MonoBehaviour, IPointerDownHandler {
         // we only want to grab objects if the click button was just pressed
         // this prevents multiple objects from unintentionally getting grabbed
         switch (isGrabbing){
+            // if grabbing, release
             case true:
                 if (MiraController.ClickButtonPressed) {
                     isGrabbing = false;
                     Debug.Log("object released");
                 }
                 break;
+            // if not grabbing, grab
             case false:
                 if (MiraController.ClickButtonPressed) {
                     isGrabbing = true;
