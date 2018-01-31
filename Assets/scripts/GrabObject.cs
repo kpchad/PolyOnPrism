@@ -28,6 +28,8 @@ public class GrabObject : MonoBehaviour, IPointerDownHandler {
     private float lastTouchPosition;
 
     private float depthSpeed = 4f;
+    private float rotateSpeed = 4f;
+
 
     // these OnPointer functions are automatically called when
     // the pointer interacts with a game object that this script is attached to
@@ -82,12 +84,13 @@ public class GrabObject : MonoBehaviour, IPointerDownHandler {
             thisTouch = MiraController.TouchPos.y;
             //Debug.Log(thisTouch);
             // now its 0.5 to -0.5
-            thisTouch -= 0.5f;
+            //thisTouch -= 0.5f;
             // now its -0.5 to 0.5
+            Debug.Log(thisTouch);
             //thisTouch *= -1.0f;
             // scale it down so it's not too strong
             thisTouch *= 0.05f;
-            //Debug.Log(thisTouch);
+
             //touchInfluence = thisTouch * depthSpeed * Time.deltaTime;
 
             // get the distance from this object to the controller
@@ -100,8 +103,10 @@ public class GrabObject : MonoBehaviour, IPointerDownHandler {
             //Debug.Log(newPosition);
             transform.position = newPosition;
             //Debug.Log(transform.position); 
-         
 
+            if (MiraController.TouchpadButton == true){
+                transform.Rotate(0, rotateSpeed, 0);
+            }
         }
     }
 }
