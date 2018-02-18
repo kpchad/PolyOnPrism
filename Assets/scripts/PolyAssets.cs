@@ -16,8 +16,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using PolyToolkit;
-using UnityEngine.SceneManagement;
-using UnityStandardAssets.CrossPlatformInput;
 
 /// <summary>
 /// Example that shows the top 5 featured models.
@@ -37,7 +35,7 @@ public class PolyAssets : MonoBehaviour {
     public Button button3;
     public Button button4;
 
-    List<PolyAsset> assetsInPalette = new List<PolyAsset>();
+    public List<PolyAsset> assetsInPalette = new List<PolyAsset>();
     // Number of assets imported so far.
     private int assetCount = 0;
     int thumbnailCount = 0;
@@ -50,6 +48,7 @@ public class PolyAssets : MonoBehaviour {
 
     }
 
+    // move to new class? (e.g. pallette manager)
     private void GetPaletteThumbnails() {
         // display featured asset thumbnais
         Debug.Log("Getting featured asset thumbnails...");
